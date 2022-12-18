@@ -1,7 +1,8 @@
 "use strict";
 const superSphincs = require( 'supersphincs' ),
     kyber = require( 'kyber-crystals' ),
-    symCryptor = require( 'symcryptor' );
+    symCryptor = require( 'symcryptor' ),
+    { encode: cbEncode, decode: cbDecode } = require( 'cbor-x' );
 if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
     Promise.all( [
         superSphincs.keyPair(),
@@ -174,17 +175,13 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                             await new Promise( r => setTimeout( r, 2000 ) );
                             await srv.connect();
                         }
-                        body = ( await client.post(
-                            srv.url + api + serverPath,
-                            await symCryptor.encrypt( Buffer.from( JSON.stringify( obj ) ), srv.key, srv.shaKey, appCred.agent ),
-                            postOptions
-                        ) ).data;
+                        body = ( await client.get( srv.url + api + serverPath ) ).data;
                     } catch ( err ) {
                         throw err;
                     }
                 }
                 try {
-                    return JSON.parse( await symCryptor.decrypt( body, srv.key, srv.shaKey, srv.agent ) );
+                    return cbDecode( await symCryptor.decrypt( body, srv.key, srv.shaKey, srv.agent ) );
                 } catch {
                     throw new Error( 'Internal server error with server ' + serverName );
                 }
@@ -205,7 +202,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                 try {
                     body = ( await client.post(
                         srv.url + api + serverPath,
-                        await symCryptor.encrypt( Buffer.from( JSON.stringify( obj ) ), srv.key, srv.shaKey, appCred.agent ),
+                        await symCryptor.encrypt( cbEncode( obj ), srv.key, srv.shaKey, appCred.agent ),
                         postOptions
                     ) ).data;
                 } catch {
@@ -220,7 +217,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                         }
                         body = ( await client.post(
                             srv.url + api + serverPath,
-                            await symCryptor.encrypt( Buffer.from( JSON.stringify( obj ) ), srv.key, srv.shaKey, appCred.agent ),
+                            await symCryptor.encrypt( cbEncode( obj ), srv.key, srv.shaKey, appCred.agent ),
                             postOptions
                         ) ).data;
                     } catch ( err ) {
@@ -228,8 +225,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                     }
                 }
                 try {
-                    const encoded = JSON.parse( await symCryptor.decrypt( body, srv.key, srv.shaKey, srv.agent ) );
-                    return encoded;
+                    return cbDecode( await symCryptor.decrypt( body, srv.key, srv.shaKey, srv.agent ) );
                 } catch {
                     throw new Error( 'Internal server error with server ' + serverName );
                 }
