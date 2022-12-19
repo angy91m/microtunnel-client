@@ -29,8 +29,8 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
         };
         const { api, timeout, appCredFile, authServersFile } = defaultOptions;
         const 
-            appCred = require( './' + appCredFile ),
-            authServers = require( './' + authServersFile ),
+            appCred = require( appCredFile ),
+            authServers = require( authServersFile ),
             HttpAgent = require( 'agentkeepalive' ),
             { HttpsAgent } = HttpAgent,
             client = require( 'axios' ).create( {

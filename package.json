@@ -1,6 +1,6 @@
 {
   "name": "microtunnel-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "NodeJS library for post-quantum communication between apps",
   "main": "index.js",
   "types": "index.d.ts",
