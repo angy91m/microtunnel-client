@@ -230,7 +230,8 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                     throw new Error( 'Internal server error with server ' + serverName );
                 }
             },
-            symCryptor
+            symCryptor,
+            authServers
         };
         return srvReq;
     };
