@@ -52,14 +52,14 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
             }
         ;
         class AuthClientSex {
-            constructor( name, url, agent, signature ) {
+            constructor( name, srvs ) {
                 this.name = name;
-                if ( typeof url === 'string' ) url = [url];
-                this.servers = url.map( ( u, i ) => ( {
+                if ( srvs.constructor !== Array ) srvs = [srvs];
+                this.servers = srvs.map( ( s, i ) => ( {
                     name,
-                    agent,
-                    signature,
-                    url: u,
+                    agent: s.agent,
+                    signature: Buffer.from( s.publicKey, 'base64' ),
+                    url: s.url,
                     active: false,
                     key: undefined,
                     shaKey: undefined,
@@ -70,19 +70,6 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                         this.active = false;
                         this.key = undefined;
                         this.shaKey = undefined;
-                    },
-                    extract() {
-                        const obj = {
-                            name,
-                            url: this.url,
-                            agent,
-                            signature,
-                            active: this.active,
-                            key: this.key,
-                            shaKey: this.shaKey,
-                            index: this.index
-                        };
-                        return obj;
                     },
                     async connect() {
                         try {
@@ -131,7 +118,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
             constructor( authServers ) {
                 const servs = [];
                 for ( const srv in authServers ) {
-                    servs.push( new AuthClientSex( srv, authServers[srv].url, authServers[srv].agent, Buffer.from( authServers[srv].publicKey, 'base64' ) ) );
+                    servs.push( new AuthClientSex( srv, authServers[srv] ) );
                 }
                 super( ...servs );
             }

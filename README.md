@@ -34,11 +34,18 @@ Then you have to create a JSON file containing servers info. In this example we 
         "publicKey": "X67kzs9zrKfbayvF5SIsulZzfUYHeTm6BoFTD/BWiryIcOWcaR8d6M4LpaOylCi4DqY59ABNt1nNnfFZjG4akE4hcKaMyx5ar9Uds2Op687uecLGWb0n6W+voSDKzMS8",
         "agent": "285gWsTqj3Gza+3AxJn1qrWzAvf/Lf5i"
     },
-    "sessions": {
-        "url": ["http://192.168.0.3:3000", "https://anotherserver.com"],
-        "publicKey": "rPyoqSZrNNUVpjKdhGLDD4sjXd8lgIgnRBY2NP5n8PDDLSvoLoD5n4GjaxbAfSDjagBjN8zztUQTNG1EKO9IgpgTLkfkTkhWqdgkC/K3EQLh6AMCZ8snlnles2QrbHAy",
-        "agent": "vwoA1JzkT6d7SXjIBoZ2egYlSn6Ajzge"
-    }
+    "sessions": [
+        {
+            "url": "http://192.168.0.3:3000",
+            "publicKey": "rPyoqSZrNNUVpjKdhGLDD4sjXd8lgIgnRBY2NP5n8PDDLSvoLoD5n4GjaxbAfSDjagBjN8zztUQTNG1EKO9IgpgTLkfkTkhWqdgkC/K3EQLh6AMCZ8snlnles2QrbHAy",
+            "agent": "vwoA1JzkT6d7SXjIBoZ2egYlSn6Ajzge"
+        },
+        {
+            "url": "http://192.168.0.4:3000",
+            "publicKey": "UFOrl4Rtp/4sLvwsHG9bTBGQ9vf95L8WQJRvueRHKbOs+Hf2vRlVw/ZIF18vf1EV+q2voXYBAwE/uhPlH2IiAkFDC8p4vEr/4xQMl45U6Y8wfgJwjGNnUorD8z/AAyR2",
+            "agent": "zzgU2bYvR0mRREkDz+sqAMOGNDBX7XrW"
+        }
+    ]
 }
 ```
 
