@@ -35,7 +35,7 @@ Then you have to create a JSON file containing servers info. In this example we 
         "agent": "285gWsTqj3Gza+3AxJn1qrWzAvf/Lf5i"
     },
     "sessions": {
-        "url": "http://192.168.0.3:3000",
+        "url": ["http://192.168.0.3:3000", "https://anotherserver.com"],
         "publicKey": "rPyoqSZrNNUVpjKdhGLDD4sjXd8lgIgnRBY2NP5n8PDDLSvoLoD5n4GjaxbAfSDjagBjN8zztUQTNG1EKO9IgpgTLkfkTkhWqdgkC/K3EQLh6AMCZ8snlnles2QrbHAy",
         "agent": "vwoA1JzkT6d7SXjIBoZ2egYlSn6Ajzge"
     }
@@ -45,7 +45,7 @@ Then you have to create a JSON file containing servers info. In this example we 
 Then you can use it in your code:
 
 ```javascript
-const authReq = require( 'microtunnel-client' )( { appCredFile: 'appCred.json', authServersFile: 'authServers.json' } );
+const authReq = require( 'microtunnel-client' )( { appCredFile: './appCred.json', authServersFile: './authServers.json' } );
 ( async () => {
     try {
         let resp = await authReq.get( 'backEnd', '/page/2' );
