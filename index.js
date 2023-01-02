@@ -137,7 +137,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
                     if ( typeof firstIndex === 'undefined' ) {
                         firstIndex = server.index;
                     } else if ( firstIndex === server.index ) {
-                        throw new Error( 'Internal server error with server ' + serverName );
+                        throw new Error( 'Internal server error with server ' + str );
                     }
                     if ( server.lastError ) {
                         if ( Date.now() > ( server.lastError + ( servErrorWait * 60000 ) ) ) {
