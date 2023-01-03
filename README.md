@@ -75,6 +75,7 @@ const authReq = require( 'microtunnel-client' )( { appCredFile: './appCred.json'
 * `timeout` Optional - Axios timeout for each request
 * `appCredFile` Optional - Relative path of the credentials file - Default: enviroment var `APP_CRED`
 * `authServersFile` Optional - Relative path of the autherized clients file - Default: enviroment var `AUTH_SRVS`
+* `customCa` Optional - Replace default Mozilla wellknowed CA with your custom CA as result of `fs.readFileSync( './ca.cert' )`
 
 ## Methods
 

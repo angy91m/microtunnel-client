@@ -37,7 +37,7 @@ if ( process.argv[1] === __filename && process.argv[2] === 'cred-generate' ) {
             client = require( 'axios' ).create( {
                 timeout,
                 httpAgent: new HttpAgent(),
-                httpsAgent: new HttpsAgent(),
+                httpsAgent: new HttpsAgent( { ca: options.customCa } ),
                 maxRedirects: 0,
                 responseType: 'arraybuffer',
                 headers: {
